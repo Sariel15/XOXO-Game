@@ -1,6 +1,6 @@
 const board = document.getElementById('board');
 const cells = document.querySelectorAll('[data-cell]');
-const status = document.getElementById('status');
+const gameStatusDisplay = document.getElementById('game-status');
 const restartButton = document.getElementById('restart');
 let currentPlayer = 'X';
 let gameActive = true;
@@ -23,18 +23,18 @@ function handleCellClick(e) {
     
     if (checkWin()) {
         gameActive = false;
-        status.textContent = `Player ${currentPlayer} wins!`;
+        gameStatusDisplay.textContent = `Player ${currentPlayer} wins!`;
         return;
     }
 
     if (checkDraw()) {
         gameActive = false;
-        status.textContent = "Game ended in a draw!";
+        gameStatusDisplay.textContent = "Game ended in a draw!";
         return;
     }
 
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    status.textContent = `Player ${currentPlayer}'s turn`;
+    gameStatusDisplay.textContent = `Player ${currentPlayer}'s turn`;
 }
 
 function checkWin() {
@@ -53,7 +53,7 @@ function restartGame() {
     currentPlayer = 'X';
     gameActive = true;
     gameState = ['', '', '', '', '', '', '', '', ''];
-    status.textContent = `Player ${currentPlayer}'s turn`;
+    gameStatusDisplay.textContent = `Player ${currentPlayer}'s turn`;
     cells.forEach(cell => {
         cell.textContent = '';
     });
@@ -66,4 +66,4 @@ cells.forEach(cell => {
 restartButton.addEventListener('click', restartGame);
 
 // Initialize game status
-status.textContent = `Player ${currentPlayer}'s turn`;
+gameStatusDisplay.textContent = `Player ${currentPlayer}'s turn`;
